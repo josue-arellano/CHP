@@ -1,0 +1,24 @@
+td {
+    min-width: 60px;
+    max-width: 80px;
+    min-height: 40px;
+}
+
+td:hover {
+    cursor: pointer;
+}
+
+mat-card {
+    margin: 8px 16px;
+    text-align: center;
+}
+
+.head {
+    min-width: 50px;
+}
+
+table {
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
