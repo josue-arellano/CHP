@@ -1,0 +1,14 @@
+<div class="super-div">
+    <div class="label">{{ date }}</div>
+    <div class="hint">Click on a course to remove it.</div>
+    <div *ngFor="let course of courses; let i = index" class="course-div">
+        <div class="border"></div>
+        <button mat-button class="class-button" (click)="removeCourse(i)">{{ course.courseNum }} &nbsp; &nbsp; &nbsp; &nbsp; {{ course.courseName }}</button>
+    </div>
+    <div *ngIf="courses.length === 0">
+        <button mat-button class="no-courses border">No More Courses!</button>
+    </div>
+    <div class="border foot">
+        <button mat-button (click)="closeDay()">Close</button>
+    </div>
+</div>

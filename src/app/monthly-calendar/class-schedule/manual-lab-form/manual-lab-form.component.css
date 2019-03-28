@@ -1,0 +1,27 @@
+.online-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.online-row mat-checkbox {
+    margin: 8px;
+}
+
+.online-row.label {
+    margin: 8px;
+}
+
+.mat-h2 {
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.super-div {
+    width: 350px;
+    margin: 8px;
+}
+
+.lab-form-errors {
+    font-size: 11px;
+    color: #f44336;
+}

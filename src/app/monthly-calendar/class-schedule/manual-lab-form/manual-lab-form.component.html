@@ -1,0 +1,71 @@
+<div class="super-div">
+    <h2 class="mat-h2">Manual Lab Input</h2>
+    <form [formGroup]="labForm">
+        <div class="online-row">
+            <div class="label">Day of Week</div>
+            <div class="label">Hours/Day</div>
+        </div>
+        <div class="online-row">
+            <mat-checkbox formControlName="mon">Monday</mat-checkbox>
+            <mat-form-field *ngIf="labForm.get('mon').value">
+                <input matInput placeholder="hrs (ex. 1:15)" formControlName="monHrs" required>
+            </mat-form-field>
+        </div>
+        <div class="online-row">
+            <mat-checkbox formControlName="tue">Tuesday</mat-checkbox>
+            <mat-form-field *ngIf="labForm.get('tue').value">
+                <input matInput placeholder="hrs (ex. 1:15)" formControlName="tueHrs" required>
+            </mat-form-field>
+        </div>
+        <div class="online-row">
+            <mat-checkbox formControlName="wed">Wednesday</mat-checkbox>
+            <mat-form-field *ngIf="labForm.get('wed').value">
+                <input matInput placeholder="hrs (ex. 1:15)" formControlName="wedHrs" required>
+            </mat-form-field>
+        </div>
+        <div class="online-row">
+            <mat-checkbox formControlName="thu">Thursday</mat-checkbox>
+            <mat-form-field *ngIf="labForm.get('thu').value">
+                <input matInput placeholder="hrs (ex. 1:15)" formControlName="thuHrs" required>
+            </mat-form-field>
+        </div>
+        <div class="online-row">
+            <mat-checkbox formControlName="fri">Friday</mat-checkbox>
+            <mat-form-field *ngIf="labForm.get('fri').value">
+                <input matInput placeholder="hrs (ex. 1:15)" formControlName="friHrs" required>
+            </mat-form-field>
+        </div>
+        <div class="online-row">
+            <mat-checkbox formControlName="sat">Saturday</mat-checkbox>
+            <mat-form-field *ngIf="labForm.get('sat').value">
+                <input matInput placeholder="hrs (ex. 1:15)" formControlName="satHrs" required>
+            </mat-form-field>
+        </div>
+        <div class="online-row">
+            <mat-checkbox formControlName="sun">Sunday</mat-checkbox>
+            <mat-form-field *ngIf="labForm.get('sun').value">
+                <input matInput placeholder="hrs (ex. 1:15)" formControlName="sunHrs" required>
+            </mat-form-field>
+        </div>
+        <div class="dates">
+            <mat-form-field class="date-input">
+                <input matInput [matDatepicker]="startDate" placeholder="Start Date" class="date-input" formControlName="startDate" required>
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="date-input">
+                <input matInput [matDatepicker]="endDate" placeholder="End Date" class="date-input" formControlName="endDate" required>
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="lab-form-errors" *ngIf="labForm.errors">
+            <div *ngIf="labForm.errors.incorrectDates">*End date must be greater than start Date.</div>
+            <div *ngIf="labForm.errors.missingDaysOfWeek">*At least one day of week must be selected.</div>
+        </div>
+        <div style="display: flex;">
+            <div style="flex: 1 1 auto;"></div>
+            <button mat-raised-button color="primary" (click)="addCourse()" [disabled]="labForm.invalid">Add</button>
+        </div>
+    </form>
+</div>

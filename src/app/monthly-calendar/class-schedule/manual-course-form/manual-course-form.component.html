@@ -1,0 +1,161 @@
+<div>
+    <h2 class="mat-h2">Course Manual Input</h2>
+    <form [formGroup]="courseForm">
+        <div style="display: block; margin-bottom: 16px;">
+            <div id="courseInfo">
+                <mat-form-field>
+                    <input matInput maxlength="5" placeholder="Course Number" formControlName="courseNum" required>
+                    <mat-hint *ngIf="courseForm.get('courseNum').errors && courseForm.get('courseNum').errors.pattern" style="color: #f44336;">*Must be a 5-digit number.</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput maxlength="10" placeholder="Course Name" formControlName="courseName">
+                </mat-form-field>
+            </div>
+
+            <mat-checkbox id="online-course-check" formControlName="onlineCourse">
+                Online Course
+            </mat-checkbox>
+        </div>
+        <div class="inclassForm" formGroupName="inclassForm" *ngIf="!courseForm.get('onlineCourse').value">
+            <div class="column left-column">
+                <div class="label">Days of Week</div>
+                <div class="column-content">
+                    <mat-checkbox formControlName="mon">Monday</mat-checkbox>
+                    <mat-checkbox formControlName="tue">Tuesday</mat-checkbox>
+                    <mat-checkbox formControlName="wed">Wednesday</mat-checkbox>
+                    <mat-checkbox formControlName="thu">Thursday</mat-checkbox>
+                    <mat-checkbox formControlName="fri">Friday</mat-checkbox>
+                    <mat-checkbox formControlName="sat">Saturday</mat-checkbox>
+                    <mat-checkbox formControlName="sun">Friday</mat-checkbox>
+                </div>
+            </div>
+            <div class="column right-column">
+                <div class="label">Times</div>
+                <div class="column-content">
+                    <h4>Start Time</h4>
+                    <mat-form-field class="time-selector">
+                        <mat-select placeholder="Hr" class="time-selector" id="hour-selector" formControlName="startHr">
+                            <mat-option *ngFor="let hour of hours" [value]="hour">
+                                {{ hour }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="time-selector">
+                        <mat-select placeholder="Min" id="minute-selector" formControlName="startMi">
+                            <mat-option *ngFor="let min of minutes" [value]="min">
+                                {{ min }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="time-selector">
+                        <mat-select placeholder="AM/PM" class="time-selector" id="period-selector" formControlName="startPe">
+                            <mat-option *ngFor="let per of period" [value]="per">
+                                {{ per }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <h4>End Time</h4>
+                    <mat-form-field class="time-selector">
+                        <mat-select placeholder="Hr" class="time-selector" id="hour-selector" formControlName="endHr">
+                            <mat-option *ngFor="let hour of hours" [value]="hour">
+                                {{ hour }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="time-selector">
+                        <mat-select placeholder="Min" id="minute-selector" formControlName="endMi">
+                            <mat-option *ngFor="let min of minutes" [value]="min">
+                                {{ min }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="time-selector">
+                        <mat-select placeholder="AM/PM" class="time-selector" id="period-selector" formControlName="endPe">
+                            <mat-option *ngFor="let per of period" [value]="per">
+                                {{ per }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div formGroupName="onlineForm" *ngIf="courseForm.get('onlineCourse').value">
+            <div class="online-row">
+                <div class="label">Day of Week</div>
+                <div class="label">Hours/Day</div>
+            </div>
+            <div class="online-row" formGroupName="mon">
+                <mat-checkbox formControlName="day">Monday</mat-checkbox>
+                <mat-form-field *ngIf="courseForm.get('onlineForm').get('mon').get('day').value">
+                    <input matInput placeholder="hrs (ex. 1:15)" formControlName="hours">
+                    <mat-hint *ngIf="courseForm.get('onlineForm').get('mon').errors" style="color: #f44336;">Missing Hours</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="online-row" formGroupName="tue">
+                <mat-checkbox formControlName="day">Tuesday</mat-checkbox>
+                <mat-form-field *ngIf="courseForm.get('onlineForm').get('tue').get('day').value">
+                    <input matInput placeholder="hrs (ex. 1:15)" formControlName="hours">
+                    <mat-hint *ngIf="courseForm.get('onlineForm').get('tue').errors" style="color: #f44336;">Missing Hours</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="online-row" formGroupName="wed">
+                <mat-checkbox formControlName="day">Wednesday</mat-checkbox>
+                <mat-form-field *ngIf="courseForm.get('onlineForm').get('wed').get('day').value">
+                    <input matInput placeholder="hrs (ex. 1:15)" formControlName="hours">
+                    <mat-hint *ngIf="courseForm.get('onlineForm').get('wed').errors" style="color: #f44336;">Missing Hours</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="online-row" formGroupName="thu">
+                <mat-checkbox formControlName="day">Thursday</mat-checkbox>
+                <mat-form-field *ngIf="courseForm.get('onlineForm').get('thu').get('day').value">
+                    <input matInput placeholder="hrs (ex. 1:15)" formControlName="hours">
+                    <mat-hint *ngIf="courseForm.get('onlineForm').get('thu').errors" style="color: #f44336;">Missing Hours</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="online-row" formGroupName="fri">
+                <mat-checkbox formControlName="day">Friday</mat-checkbox>
+                <mat-form-field *ngIf="courseForm.get('onlineForm').get('fri').get('day').value">
+                    <input matInput placeholder="hrs (ex. 1:15)" formControlName="hours">
+                    <mat-hint *ngIf="courseForm.get('onlineForm').get('fri').errors" style="color: #f44336;">Missing Hours</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="online-row" formGroupName="sat">
+                <mat-checkbox formControlName="day">Saturday</mat-checkbox>
+                <mat-form-field *ngIf="courseForm.get('onlineForm').get('sat').get('day').value">
+                    <input matInput placeholder="hrs (ex. 1:15)" formControlName="hours">
+                    <mat-hint *ngIf="courseForm.get('onlineForm').get('sat').errors" style="color: #f44336;">Missing Hours</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="online-row" formGroupName="sun">
+                <mat-checkbox formControlName="day">Sunday</mat-checkbox>
+                <mat-form-field *ngIf="courseForm.get('onlineForm').get('sun').get('day').value">
+                    <input matInput placeholder="hrs (ex. 1:15)" formControlName="hours">
+                    <mat-hint *ngIf="courseForm.get('onlineForm').get('sun').errors" style="color: #f44336">Missing Hours</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="dates">
+            <mat-form-field class="date-input">
+                <input matInput [matDatepicker]="startDate" placeholder="Start Date" class="date-input" formControlName="startDate" required>
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="date-input">
+                <input matInput [matDatepicker]="endDate" placeholder="End Date" class="date-input" formControlName="endDate" required>
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="course-form-errors" *ngIf="courseForm.errors">
+            <div *ngIf="courseForm.errors.incorrectDates">*End date must be greater than start date.</div>
+            <div *ngIf="courseForm.errors.incorrectTimes">*End time must be greater than start time.</div>
+            <div *ngIf="courseForm.errors.missingDaysOfWeek">*At least one day of the week must be selected.</div>
+        </div>
+        <div style="display: flex;">
+            <div style="flex: 1 1 auto;"></div>
+            <button mat-raised-button color="primary" (click)="addCourse()" [disabled]="courseForm.invalid">Add</button>
+        </div>
+    </form>
+</div>

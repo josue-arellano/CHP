@@ -1,0 +1,72 @@
+.mat-h2 {
+    font-weight: 400;
+    font-size: 25px;
+}
+
+mat-form-field {
+    padding: 8px;
+}
+
+mat-checkbox {
+    margin: 4px;
+}
+
+#courseInfo {
+    display: block;
+}
+
+#online-course-check {
+    padding-bottom: 16px;
+}
+
+.column-content mat-checkbox {
+    display: block;
+}
+
+.column {
+    display: inline-block;
+}
+
+.left-column mat-form-field {
+    display: block;
+}
+
+.right-column {
+    display: inline-block;
+    right: 16px;
+    text-align: right;
+}
+
+.time-selector {
+    max-width: 60px;
+    display: inline-block;
+}
+
+.inclassForm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column-content h4 {
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.online-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dates {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-input {
+    max-width: 150px;
+}
+
+.course-form-errors {
+    font-size: 11px;
+    color: #f44336;
+}

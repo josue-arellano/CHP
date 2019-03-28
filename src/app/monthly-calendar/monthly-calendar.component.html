@@ -1,80 +1,60 @@
-<mat-card>
-    <table border="1">
-        <tr>
-            <th class="head">Day</th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-            <th>11</th>
-            <th>12</th>
-            <th>13</th>
-            <th>14</th>
-            <th>15</th>
-            <th>16</th>
-        </tr>
-        <tr>
-            <th class="head">Hrs</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th class="head">Day</th>
-            <th>17</th>
-            <th>18</th>
-            <th>19</th>
-            <th>20</th>
-            <th>21</th>
-            <th>22</th>
-            <th>23</th>
-            <th>24</th>
-            <th>25</th>
-            <th>26</th>
-            <th>27</th>
-            <th>28</th>
-            <th>29</th>
-            <th>30</th>
-            <th>31</th>
-            <th>Total</th>
-        </tr>
-        <tr>
-            <th class="head">Hrs</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-</mat-card>
+<div id="super-div">
+    <div >
+        <mat-toolbar color="primary">
+            <h1 id="mat-h1">Monthly Attendance Report Generator</h1>
+        </mat-toolbar>
+    </div>
+    <div id="content">
+        <div id="monthly">
+            <mat-card>
+                <mat-form-field id="month-year-header">
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a month and year" [formControl]="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker
+                        startView="multi-year"
+                        (yearSelected)="chosenYearHandler($event)"
+                        (monthSelected)="chosenMonthHandler($event, picker)"
+                        panelClass="example-month-picker">
+                    </mat-datepicker>
+                </mat-form-field>   
+                <div class="center-content">
+                    <table border="1">
+                        <tr>
+                            <th class="head">Day</th>
+                            <th *ngFor='let day of daysRow1Head'>{{ day }}</th>
+                        </tr>
+                        <tr>
+                            <th class="head">Hrs</th>
+                            <td *ngFor='let day of days1; let i = index'>
+                                <ng-template [ngIf]="day.totalString !== nil" [ngIfElse]="zero">
+                                    <div (click)="openDay1(i)">{{ day.totalString }}</div>
+                                </ng-template>
+                                <ng-template #zero></ng-template>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="head">Day</th>
+                            <th *ngFor="let day of daysRow2Head">{{ day }}</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <th class="head">Hrs</th>
+                            <td *ngFor='let day of days2; let i = index'>
+                                <ng-template [ngIf]="day.totalString !== nil" [ngIfElse]="zero">
+                                    <div (click)="openDay2(i)">{{ day.totalString }}</div>
+                                </ng-template>
+                                <ng-template #zero></ng-template>
+                            </td>
+                            <td>{{ totalString }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </mat-card>
+        </div>
+        <div id="monthly-form">
+            <mat-card> 
+                <class-schedule (courseEvent)="updateClassSchedule($event)"></class-schedule>
+            </mat-card>
+        </div>
+    </div>
+</div>

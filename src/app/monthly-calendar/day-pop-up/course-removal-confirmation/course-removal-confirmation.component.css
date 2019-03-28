@@ -1,0 +1,12 @@
+.selectors {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    margin: 8px;
+}
+
+.yes:hover {
+    color: green;
+}

@@ -4,13 +4,18 @@ td {
     min-height: 40px;
 }
 
+tr {
+    text-align: center;
+}
+
 td:hover {
     cursor: pointer;
 }
 
 mat-card {
     margin: 8px 16px;
-    text-align: center;
+    display: inline-block;
+    text-align: left;
 }
 
 .head {
@@ -21,4 +26,57 @@ table {
     border-spacing: 0px;
     margin-left: auto;
     margin-right: auto;
+}
+
+#super-div {
+    text-align: center;
+}
+
+#content {
+    min-width: 1080px;
+    max-width: 1112px;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+#mat-h1 {
+    text-align: left;
+    padding: 28px 8px;
+    font-size: 20px;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+mat-toolbar {
+    padding-left: 20px;
+    height: auto;
+}
+
+#monthly {
+    display: block;
+}
+
+#monthly-form {
+    display: block;
+    align-content: stretch;
+    text-align: left;
+}
+
+#monthly-form mat-card {
+    width: 1080px;
+}
+
+.example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+    display: none;
+}
+
+#month-year-header input {
+    font-size: 20px;
+    font-weight: 300;
 }
