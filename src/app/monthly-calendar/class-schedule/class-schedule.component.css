@@ -6,7 +6,12 @@ table {
     padding: 0;
 }
 
-.class-schedule-search-bar button {
+.class-schedule-search-bar{
+    display: block;
+    margin: 16px 8px;
+}
+
+button {
     margin: 16px 8px;
 }
 
@@ -17,4 +22,18 @@ table {
 .header {
     font-weight: 400;
     margin: 0px 8px;
+}
+
+.course-selector {
+    max-width: 100px;
+}
+
+.course-search-form {
+    display: inline-block;
+}
+
+.course-form-object {
+    display: inline-block;
+    position: relative;
+    padding: 0px 8px;
 }

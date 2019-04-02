@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material'
 import { ManualCourseComponent } from './manual-course-form/manual-course-form.component'
 import { ManualLabFormComponent } from './manual-lab-form/manual-lab-form.component'
+import { WebService } from '../../services/web.services'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 const onlineWarningError = "You are trying to add an online course! Please add this course with the manual course form by clicking the 'Add Course Manually' button."
 
@@ -22,11 +24,36 @@ export class ClassScheduleComponent {
         new Course("ADM JUS 006", "Patrol Procedures", '24910', false, "Tu", "02/4/2019-06/-3/2019", "05:30PM-08:40PM")
     ]
 
+    thisYear = new Date().getFullYear();
+
+    semesters = [
+        "Winter",
+        "Spring",
+        "Summer",
+        "Fall"
+    ]
+
+    years = [
+        this.thisYear - 2,
+        this.thisYear - 1,
+        this.thisYear,
+        this.thisYear + 1
+    ]
+
     deletedCourses: Course[] = []
 
-    includesLab = false
+    courseSearchForm = new FormGroup ({
+        courseNum: new FormControl('', [
+            Validators.pattern('[1-9][0-9][0-9][0-9][0-9]')
+        ]),
+        semester: new FormControl(''),
+        year: new FormControl('')
+    })
 
-    constructor(public dialog: MatDialog, public snackbar: MatSnackBar) {}
+    includesLab = false
+    finished = true
+
+    constructor(private webService: WebService, public dialog: MatDialog, public snackbar: MatSnackBar) {}
 
     ngOnInit() {
         this.courseEvent.emit(this.classSchedule)
@@ -60,6 +87,19 @@ export class ClassScheduleComponent {
                 this.courseEvent.emit(this.classSchedule)
             }
         })
+    }
+
+    searchForCourse() {
+        let courseNumber = this.courseSearchForm.get("courseNum").value
+        let semester = this.courseSearchForm.get("semester").value
+        let year = this.courseSearchForm.get("year").value
+        let newCourse = {}
+        this.finished = false
+        this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourse = courseInfo,
+                err => console.log(err),
+                () => this.finished = true
+            )
+        //var newCourse = new Course()
     }
 
     openManualLabForm(): void {

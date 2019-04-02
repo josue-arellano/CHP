@@ -3,11 +3,29 @@
         <h1>Class Schedule</h1>
     </div>
     <div class="class-schedule-search-bar">
-        <mat-form-field>
-            <input type="text" matInput placeholder="Enter class number">
-            <mat-icon matSuffix svgIcon="home"></mat-icon>
-        </mat-form-field>
-        <button mat-raised-button color="primary">Add</button>
+        <div class="course-search-form">
+            <form [formGroup]="courseSearchForm">
+                <mat-form-field class="course-form-object">
+                    <input type="text" maxlength="5" matInput placeholder="Enter class number" formControlName="courseNum" required>
+                    <mat-icon matSuffix svgIcon="home"></mat-icon>
+                </mat-form-field>
+                <mat-form-field class="course-selector course-form-object">
+                    <mat-select placeholder="Semester" formControlName="semester" required>
+                        <mat-option *ngFor="let semester of semesters" [value]="semester">
+                            {{ semester }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="course-selector course-form-object">
+                    <mat-select placeholder="Year" formControlName="year" required>
+                        <mat-option *ngFor="let year of years" [value]="year">
+                            {{ year }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-raised-button (click)="searchForCourse()" color="primary" [disabled]="courseSearchForm.invalid">Search</button>
+            </form>
+        </div>
         <button mat-raised-button (click)="openManualCourseForm()">Add Course Manually</button>
         <button mat-raised-button (click)="openManualLabForm()" color="accent" [disabled]="includesLab">Add Lab</button>
     </div>
@@ -53,5 +71,8 @@
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
         </table>
+        <div *ngIf="!finished">
+            <mat-progress-spinner></mat-progress-spinner>
+        </div>
     </div>
 </div>

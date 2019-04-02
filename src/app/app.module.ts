@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router'
+import { HttpModule } from '@angular/http'
+import { WebService } from '../app/services/web.services'
 import { 
   MatButtonModule, 
   MatCardModule,
@@ -15,7 +17,8 @@ import {
   MatBadgeModule,
   MatCheckboxModule,
   MatTabsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatProgressSpinnerModule
 } from '@angular/material'
 import { MatDialogModule } from '@angular/material/dialog'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -76,9 +79,11 @@ var routes = [{
     MatCheckboxModule,
     MatTabsModule,
     MatSelectModule,
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+    HttpModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [ WebService ],
   bootstrap: [AppComponent],
   entryComponents: [
     ManualCourseComponent,
