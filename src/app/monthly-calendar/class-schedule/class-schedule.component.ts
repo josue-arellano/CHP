@@ -103,6 +103,7 @@ export class ClassScheduleComponent {
                     if(newCourseInfo.daysOfWeek == "TBA") {
             
                     } else {
+                        console.log(newCourseInfo)
                         let newCourse = new Course(
                             newCourseInfo.courseName, 
                             newCourseInfo.courseDesc, 
@@ -110,7 +111,7 @@ export class ClassScheduleComponent {
                             false, 
                             newCourseInfo.daysOfWeek,
                             newCourseInfo.meetingDates,
-                            newCourseInfo.meetingTimes
+                            newCourseInfo.meetingTime
                         )
                         this.classSchedule = this.classSchedule.concat(newCourse)
                     }
