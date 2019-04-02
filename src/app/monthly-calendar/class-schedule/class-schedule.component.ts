@@ -101,7 +101,8 @@ export class ClassScheduleComponent {
                     this.finished = true
                     let variableSchedul = false;
                     if(newCourseInfo.daysOfWeek == "TBA") {
-            
+                        let errorMessage = "This course seems to be a lab or an online course. Please add this course by clicking the 'Add Course Manually' button."
+                        this.openSnackBar(errorMessage, "Close")
                     } else {
                         console.log(newCourseInfo)
                         let newCourse = new Course(
@@ -114,6 +115,7 @@ export class ClassScheduleComponent {
                             newCourseInfo.meetingTime
                         )
                         this.classSchedule = this.classSchedule.concat(newCourse)
+                        this.courseEvent.emit(this.classSchedule)
                     }
                 }
             )

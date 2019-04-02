@@ -71,8 +71,8 @@
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
         </table>
-        <div *ngIf="!finished">
-            <mat-progress-spinner></mat-progress-spinner>
+        <div *ngIf="!finished" class="spinner-div">
+            <mat-spinner [diameter]="25"></mat-spinner>
         </div>
     </div>
 </div>
