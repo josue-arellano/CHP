@@ -93,13 +93,29 @@ export class ClassScheduleComponent {
         let courseNumber = this.courseSearchForm.get("courseNum").value
         let semester = this.courseSearchForm.get("semester").value
         let year = this.courseSearchForm.get("year").value
-        let newCourse = {}
+        let newCourseInfo
         this.finished = false
-        this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourse = courseInfo,
+        this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourseInfo = courseInfo,
                 err => console.log(err),
-                () => this.finished = true
+                () => {
+                    this.finished = true
+                    let variableSchedul = false;
+                    if(newCourseInfo.daysOfWeek == "TBA") {
+            
+                    } else {
+                        let newCourse = new Course(
+                            newCourseInfo.courseName, 
+                            newCourseInfo.courseDesc, 
+                            newCourseInfo.courseNum, 
+                            false, 
+                            newCourseInfo.daysOfWeek,
+                            newCourseInfo.meetingDates,
+                            newCourseInfo.meetingTimes
+                        )
+                        this.classSchedule = this.classSchedule.concat(newCourse)
+                    }
+                }
             )
-        //var newCourse = new Course()
     }
 
     openManualLabForm(): void {
