@@ -95,7 +95,7 @@ export class ClassScheduleComponent {
         let year = this.courseSearchForm.get("year").value
         let newCourseInfo
         this.finished = false
-        this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourseInfo = courseInfo.json(),
+        this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourseInfo = courseInfo,
                 err => console.log(err),
                 () => {
                     this.finished = true

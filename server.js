@@ -155,7 +155,7 @@ app.get('/api', async (req, res) => {
 
     console.log("done")
     console.log(response)
-    res.json(response)
+    res.json(response.json())
 })
 
 // Serve only the static files form the dist directory
