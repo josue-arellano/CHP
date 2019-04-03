@@ -51,7 +51,7 @@ export class ClassScheduleComponent {
     })
 
     includesLab = false
-    finished = true
+    searching = false
 
     constructor(private webService: WebService, public dialog: MatDialog, public snackbar: MatSnackBar) {}
 
@@ -94,14 +94,14 @@ export class ClassScheduleComponent {
         let semester = this.courseSearchForm.get("semester").value
         let year = this.courseSearchForm.get("year").value
         let newCourseInfo
-        this.finished = false
+        this.searching = true
         this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourseInfo = courseInfo.json(),
                 err => console.log(err),
                 () => {
-                    this.finished = true
-                    let variableSchedul = false;
+                    this.searching = false
+                    this.courseSearchForm.get("courseNum").setValue('');
                     if(newCourseInfo.daysOfWeek == "TBA") {
-                        let errorMessage = "This course seems to be a lab or an online course. Please add this course by clicking the 'Add Course Manually' button."
+                        let errorMessage = "This course is either a lab or an online course. Please add this course manually by clicking the 'Add Course Manually' button."
                         this.openSnackBar(errorMessage, "Close")
                     } else {
                         console.log(newCourseInfo)
