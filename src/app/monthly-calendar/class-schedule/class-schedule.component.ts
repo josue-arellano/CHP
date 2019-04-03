@@ -19,10 +19,7 @@ export class ClassScheduleComponent {
 
     @Output() courseEvent = new EventEmitter<Course[]>()
     
-    classSchedule: Course[] = [
-        new Course("ADM JUS 006", "Patrol Procedures", '13478', false, "We", "02/04/2019-06/03/2019", "06:50PM-10:00PM"),
-        new Course("ADM JUS 006", "Patrol Procedures", '24910', false, "Tu", "02/4/2019-06/-3/2019", "05:30PM-08:40PM")
-    ]
+    classSchedule: Course[] = []
 
     thisYear = new Date().getFullYear();
 
