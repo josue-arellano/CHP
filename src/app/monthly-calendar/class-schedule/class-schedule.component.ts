@@ -101,7 +101,11 @@ export class ClassScheduleComponent {
             }
         })
         this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourseInfo = courseInfo.json(),
-                err => console.log(err),
+                err => {
+                    dialogRef.close();
+                    console.log(err)
+                    this.openSnackBar("Course listing for semester selected does not exist. Try again with another semester!", "Close")
+                },
                 () => {
                     dialogRef.close("Found Course!");
                     this.searching = false
