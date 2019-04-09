@@ -106,13 +106,15 @@ export class ClassScheduleComponent {
                     dialogRef.close("Found Course!");
                     this.searching = false
                     this.courseSearchForm.get("courseNum").setValue('');
-                    if(newCourseInfo.courseName == "") {
-                        this.openSnackBar("Course not found!", "Close");
-                    } else if(newCourseInfo.daysOfWeek == "TBA") {
+                    if(newCourseInfo.daysOfWeek == "TBA") {
                         let errorMessage = "This course is either a lab or an online course. Please add this course manually by clicking the 'Add Course Manually' button."
                         this.openSnackBar(errorMessage, "Close")
+                    }
+                    if(newCourseInfo.courseName == "") {
+                        this.openSnackBar("Course not found!", "Close");
                     } else {
-                        console.log(newCourseInfo)
+                        let courseInfoString = "Added course: " + newCourseInfo.courseNum + " " + newCourseInfo.courseName + ", " + newCourseInfo.courseDesc + "."
+                        this.openSnackBar(courseInfoString, "Close")
                         let newCourse = new Course(
                             newCourseInfo.courseName, 
                             newCourseInfo.courseDesc, 
