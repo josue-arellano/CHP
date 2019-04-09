@@ -6,6 +6,7 @@ import { ManualCourseComponent } from './manual-course-form/manual-course-form.c
 import { ManualLabFormComponent } from './manual-lab-form/manual-lab-form.component'
 import { WebService } from '../../services/web.services'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { SearchingComponent } from './searching/searching.component';
 
 const onlineWarningError = "You are trying to add an online course! Please add this course with the manual course form by clicking the 'Add Course Manually' button."
 
@@ -92,12 +93,22 @@ export class ClassScheduleComponent {
         let year = this.courseSearchForm.get("year").value
         let newCourseInfo
         this.searching = true
+        const dialogRef = this.dialog.open(SearchingComponent, {
+            data: {
+                courseNum: courseNumber,
+                semester: semester,
+                year: year
+            }
+        })
         this.webService.getCourseInfo(semester, year, courseNumber).subscribe(courseInfo => newCourseInfo = courseInfo.json(),
                 err => console.log(err),
                 () => {
+                    dialogRef.close("Found Course!");
                     this.searching = false
                     this.courseSearchForm.get("courseNum").setValue('');
-                    if(newCourseInfo.daysOfWeek == "TBA") {
+                    if(newCourseInfo.courseName == "") {
+                        this.openSnackBar("Course not found!", "Close");
+                    } else if(newCourseInfo.daysOfWeek == "TBA") {
                         let errorMessage = "This course is either a lab or an online course. Please add this course manually by clicking the 'Add Course Manually' button."
                         this.openSnackBar(errorMessage, "Close")
                     } else {

@@ -76,6 +76,11 @@ mat-toolbar {
     display: none;
 }
 
+#day-pop-up-notice {
+    font-size: 15px;
+    color: #f44336;
+}
+
 #month-year-header input {
     font-size: 20px;
     font-weight: 300;

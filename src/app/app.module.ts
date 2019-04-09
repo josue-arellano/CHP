@@ -18,7 +18,8 @@ import {
   MatCheckboxModule,
   MatTabsModule,
   MatSelectModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatBottomSheetModule
 } from '@angular/material'
 import { MatDialogModule } from '@angular/material/dialog'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -33,14 +34,11 @@ import { ManualCourseComponent } from './monthly-calendar/class-schedule/manual-
 import { ManualLabFormComponent } from './monthly-calendar/class-schedule/manual-lab-form/manual-lab-form.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MomentModule } from 'ngx-moment'
+import { SearchingComponent } from './monthly-calendar/class-schedule/searching/searching.component'
 import { CourseRemovalConfirmationComponent } from './monthly-calendar/day-pop-up/course-removal-confirmation/course-removal-confirmation.component'
 import { CourseClearConfirmationComponent } from './monthly-calendar/day-pop-up/course-clear-confirmation/course-clear-confirmation.component'
 var routes = [{
   path: '',
-  component: HomeComponent
-},
-{
-  path: 'monthly',
   component: MonthlyCalendarComponent
 }]
 
@@ -55,7 +53,8 @@ var routes = [{
     ManualCourseComponent,
     ManualLabFormComponent,
     CourseRemovalConfirmationComponent,
-    CourseClearConfirmationComponent
+    CourseClearConfirmationComponent,
+    SearchingComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +80,8 @@ var routes = [{
     MatSelectModule,
     AmazingTimePickerModule,
     HttpModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatBottomSheetModule
   ],
   providers: [ WebService ],
   bootstrap: [AppComponent],
@@ -90,7 +90,8 @@ var routes = [{
     ManualLabFormComponent,
     DayPopUpComponent,
     CourseRemovalConfirmationComponent,
-    CourseClearConfirmationComponent
+    CourseClearConfirmationComponent,
+    SearchingComponent
   ]
 })
 export class AppModule { }
