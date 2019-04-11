@@ -7,6 +7,7 @@ import { ManualLabFormComponent } from './manual-lab-form/manual-lab-form.compon
 import { WebService } from '../../services/web.services'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { SearchingComponent } from './searching/searching.component';
+import { Stack } from '../helper-classes/stack'
 
 const onlineWarningError = "You are trying to add an online course! Please add this course with the manual course form by clicking the 'Add Course Manually' button."
 
@@ -21,6 +22,8 @@ export class ClassScheduleComponent {
     @Output() courseEvent = new EventEmitter<Course[]>()
     
     classSchedule: Course[] = []
+
+    deletedCourses: Stack = new Stack
 
     thisYear = new Date().getFullYear();
 
@@ -38,8 +41,6 @@ export class ClassScheduleComponent {
         this.thisYear + 1
     ]
 
-    deletedCourses: Course[] = []
-
     courseSearchForm = new FormGroup ({
         courseNum: new FormControl('', [
             Validators.pattern('[1-9][0-9][0-9][0-9][0-9]')
@@ -50,6 +51,7 @@ export class ClassScheduleComponent {
 
     includesLab = false
     searching = false
+    deletedIsEmpty = this.deletedCourses.isEmpty()
 
     constructor(private webService: WebService, public dialog: MatDialog, public snackbar: MatSnackBar) {}
 
@@ -65,12 +67,25 @@ export class ClassScheduleComponent {
 
     remove(courseNum: string) {
         if(courseNum === "00000") this.includesLab = false
+        for(let course of this.classSchedule) {
+            if(course.courseNum === courseNum) {
+                this.deletedCourses.push(course)
+                console.log(this.deletedCourses.courses)
+            }
+        }
         if(this.classSchedule.length === 1) this.classSchedule = []
         else {
             this.classSchedule = this.classSchedule.filter(function(value, index, arr) {
                 return value.courseNum !== courseNum
             })
         }
+        this.deletedIsEmpty = this.deletedCourses.isEmpty()
+        this.courseEvent.emit(this.classSchedule)
+    }
+
+    undoDelete() {
+        this.classSchedule = this.classSchedule.concat(this.deletedCourses.pop())
+        this.deletedIsEmpty = this.deletedCourses.isEmpty()
         this.courseEvent.emit(this.classSchedule)
     }
 
@@ -110,12 +125,11 @@ export class ClassScheduleComponent {
                     dialogRef.close("Found Course!");
                     this.searching = false
                     this.courseSearchForm.get("courseNum").setValue('');
-                    if(newCourseInfo.daysOfWeek == "TBA") {
-                        let errorMessage = "This course is either a lab or an online course. Please add this course manually by clicking the 'Add Course Manually' button."
-                        this.openSnackBar(errorMessage, "Close")
-                    }
                     if(newCourseInfo.courseName == "") {
                         this.openSnackBar("Course not found!", "Close");
+                    } else if(newCourseInfo.daysOfWeek == "TBA") {
+                        let errorMessage = "This course is either a lab or an online course. Please add this course manually by clicking the 'Add Course Manually' button."
+                        this.openSnackBar(errorMessage, "Close")
                     } else {
                         let courseInfoString = "Added course: " + newCourseInfo.courseNum + " " + newCourseInfo.courseName + ", " + newCourseInfo.courseDesc + "."
                         this.openSnackBar(courseInfoString, "Close")

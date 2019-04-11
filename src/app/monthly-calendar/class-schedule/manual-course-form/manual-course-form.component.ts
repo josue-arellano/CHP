@@ -284,4 +284,12 @@ export class ManualCourseComponent {
         var endDate = moment(this.courseForm.get('endDate').value).format('MM/DD/YYYY')
         return startDate + "-" + endDate
     }
+
+    clearCourseInfo() {
+        if (this.courseForm.get('onlineCourse').value) {
+            this.courseForm.get('inclassForm').reset()
+        } else {
+            this.courseForm.get('onlineForm').reset()
+        }
+    }
 }

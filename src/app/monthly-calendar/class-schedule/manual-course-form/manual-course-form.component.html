@@ -13,7 +13,7 @@
                 </mat-form-field>
             </div>
 
-            <mat-checkbox id="online-course-check" formControlName="onlineCourse">
+            <mat-checkbox id="online-course-check" (click)="clearCourseInfo()" formControlName="onlineCourse">
                 Online Course
             </mat-checkbox>
         </div>

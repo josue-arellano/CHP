@@ -2,7 +2,7 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 body {
-    top: 64px;
+    top: 0px;
     position: absolute;
     left: 0;
     right: 0;

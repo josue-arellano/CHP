@@ -27,7 +27,8 @@
             </form>
         </div>
         <button mat-raised-button (click)="openManualCourseForm()">Add Course Manually</button>
-        <button mat-raised-button (click)="openManualLabForm()" color="accent" [disabled]="includesLab">Add Lab</button>
+        <button mat-raised-button (click)="openManualLabForm()" color="accent" [disabled]="includesLab">Add CalWORKs Lab</button>
+        <button mat-raised-button (click)="undoDelete()" color="primary" [disabled]="deletedIsEmpty">Undo</button>
     </div>
     <div>
         <table mat-table [dataSource]="classSchedule">
