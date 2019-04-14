@@ -57,6 +57,7 @@ export class MonthlyCalendarComponent {
             this.daysRow2Head[i] = i + 17
             var thisDay = (i + 17).toString() + "/" + this.date.value.format("MM/YYYY")
             this.days2[i] = new Day(thisDay)         
+            console.log(this.days2[i]);
         }
         this.totalString = this.nil
     }
@@ -98,7 +99,7 @@ export class MonthlyCalendarComponent {
                 let todayRow2 = this.days2[i]
                 todayRow2.resetDate(i+17, this.date.value)
                 for(let j = 0; j < this.classSchedule.length; j++) {
-                    todayRow2.add(this.classSchedule[j])
+                    if(todayRow2.date.month() === this.date.value.month())todayRow2.add(this.classSchedule[j])
                 }
                 this.total.add(todayRow2.totalHours)
             }
