@@ -130,7 +130,10 @@ export class MonthlyCalendarComponent {
 
     openDay1(date: number): void {
         const dialogRef = this.dialog.open(DayPopUpComponent, {
-            data: this.days1[date].courses
+            data: {
+                courses: this.days1[date].courses,
+                date: this.days1[date].date
+            }
         })
 
         dialogRef.afterClosed().subscribe(result => {
@@ -143,7 +146,10 @@ export class MonthlyCalendarComponent {
 
     openDay2(date: number): void {
         const dialogRef = this.dialog.open(DayPopUpComponent, {
-            data: this.days2[date].courses
+            data: {
+                courses: this.days2[date].courses,
+                date: this.days2[date].date
+            }
         })
         dialogRef.afterClosed().subscribe(result => {
             if(result) {

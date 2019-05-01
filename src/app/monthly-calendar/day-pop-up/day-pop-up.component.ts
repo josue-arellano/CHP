@@ -3,6 +3,7 @@ import { MatDialogRef, MatDialog,  MAT_DIALOG_DATA } from '@angular/material'
 import { Course } from '../helper-classes/course'
 import { CourseRemovalConfirmationComponent } from './course-removal-confirmation/course-removal-confirmation.component'
 import { CourseClearConfirmationComponent } from './course-clear-confirmation/course-clear-confirmation.component'
+import { Day } from '../helper-classes/day'
 import * as _moment from 'moment'
 
 let moment = _moment
@@ -13,15 +14,15 @@ let moment = _moment
     styleUrls: ['./day-pop-up.component.css', '../../component-styles.css']
 })
 export class DayPopUpComponent {
-    date = moment().format('dddd, MMM D, YYYY')
 
     constructor(
         public dialog: MatDialog,
         public dialogRef: MatDialogRef<DayPopUpComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any[]
+        @Inject(MAT_DIALOG_DATA) public data: Day
     ) {}
 
-    courses = this.data
+    courses = this.data.courses
+    date = this.data.date.format('dddd, MMM D, YYYY')
 
     removeCourse(index: number): void {
         const dialogRef = this.dialog.open(CourseRemovalConfirmationComponent)
