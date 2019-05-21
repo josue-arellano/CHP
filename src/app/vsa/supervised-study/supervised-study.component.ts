@@ -4,7 +4,7 @@ import { Course } from '../../monthly-calendar/helper-classes/course'
 
 @Component({
     selector: 'supervised-study',
-    template: '<div>test</div>',
+    templateUrl: './supervised-study.component.html'
 })
 export class SupervisedStudyComponent {
     classSchedule: Course[] []

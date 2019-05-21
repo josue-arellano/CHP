@@ -38,10 +38,14 @@ import { SearchingComponent } from './monthly-calendar/class-schedule/searching/
 import { CourseRemovalConfirmationComponent } from './monthly-calendar/day-pop-up/course-removal-confirmation/course-removal-confirmation.component'
 import { CourseClearConfirmationComponent } from './monthly-calendar/day-pop-up/course-clear-confirmation/course-clear-confirmation.component'
 import { VSAComponent } from './vsa/vsa.component'
+import { SupervisedStudyComponent } from './vsa/supervised-study/supervised-study.component'
 
 var routes = [{
   path: '',
   component: MonthlyCalendarComponent
+},{
+  path: 'vsa',
+  component: VSAComponent
 }]
 
 @NgModule({
@@ -57,7 +61,8 @@ var routes = [{
     CourseRemovalConfirmationComponent,
     CourseClearConfirmationComponent,
     SearchingComponent,
-    VSAComponent
+    VSAComponent,
+    SupervisedStudyComponent
   ],
   imports: [
     BrowserModule,
