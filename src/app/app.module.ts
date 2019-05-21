@@ -37,6 +37,8 @@ import { MomentModule } from 'ngx-moment'
 import { SearchingComponent } from './monthly-calendar/class-schedule/searching/searching.component'
 import { CourseRemovalConfirmationComponent } from './monthly-calendar/day-pop-up/course-removal-confirmation/course-removal-confirmation.component'
 import { CourseClearConfirmationComponent } from './monthly-calendar/day-pop-up/course-clear-confirmation/course-clear-confirmation.component'
+import { VSAComponent } from './vsa/vsa.component'
+
 var routes = [{
   path: '',
   component: MonthlyCalendarComponent
@@ -54,7 +56,8 @@ var routes = [{
     ManualLabFormComponent,
     CourseRemovalConfirmationComponent,
     CourseClearConfirmationComponent,
-    SearchingComponent
+    SearchingComponent,
+    VSAComponent
   ],
   imports: [
     BrowserModule,

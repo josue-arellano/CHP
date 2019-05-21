@@ -6,6 +6,25 @@ var bodyParser = require('body-parser')
 var request = require('request')
 var cheerio = require('cheerio')
 var schedule = require('node-schedule')
+var mongodb = require('mongodb')
+var ObjectID = mongodb.ObjectID
+
+var db
+const PORT = process.env.PORT || 5000
+
+mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test',{ useNewUrlParser: true }, function(err, client) {
+    if(err) {
+        console.log(err)
+        process.exit(1)
+    }
+
+    db = client.db()
+    console.log("Database connection ready")
+
+    var server = app.listen(PORT, () => {
+        console.log("Server is running on port", PORT)
+    })
+})
 
 const semesters = [
     'Winter',
@@ -28,6 +47,12 @@ function checkRequest(url) {
             }
         })
     })
+}
+
+var getSemester = (semester, year) => {
+    let collections = []
+    db.command("")
+    return collections
 }
 
 function getRequest(url) {
@@ -151,6 +176,7 @@ app.get('/api', async (req, res) => {
     }
     const semester = req.query.semester
     const year = req.query.year
+    
     const response = await runMe('http://elac.edu/academics/schedules/courselisting/class_list_'+ semester + '_' + year + '.htm', req.query.course)
 
     console.log("done")
@@ -164,6 +190,18 @@ app.use(express.static(__dirname + '/dist/frontend'));
 app.get('/', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
 });
+app.get('/vsa', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
+});
+
+app.get('/semester', function(req, res) {
+    let semester = req.query.semester
+    let year = req.query.year
+    collections = getSemester(semester, year)
+    res.send({
+        "message": "ok",
+        "collections": collections
+    })
+})
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
