@@ -43,8 +43,9 @@
                         <input matInput placeholder="hrs/wk" formControlName="workshops">
                     </mat-form-field>
                 </div>
-                <button (click)="test()">Test</button>
+                <button (click)="calculateTotal()">Test</button>
             </form>
+            <div>{{ totalHours }}</div>
         </mat-card>
     </div>
     <div>

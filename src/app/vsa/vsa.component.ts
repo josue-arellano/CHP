@@ -23,7 +23,41 @@ export class VSAComponent{
     testForm = new FormControl('')
     constructor() {}
 
-    test():void {
-        console.log(this.hoursPerWeekForm.value);
+    calculateTotal():void {
+        let classTimeString = this.hoursPerWeekForm.get('classTime').value
+        let classTime = this.parseHours(classTimeString)
+        let supervisedStudyString = this.hoursPerWeekForm.get('supervisedStudy').value
+        let supervisedStudy = this.parseHours(supervisedStudyString)
+        let unsupervisedStudyString = this.hoursPerWeekForm.get('unsupervisedStudy').value
+        let unsupervisedStudy = this.parseHours(unsupervisedStudyString)
+        let workstudyString = this.hoursPerWeekForm.get('workstudy').value
+        let workstudy = this.parseHours(workstudyString)
+        let commServiceString = this.hoursPerWeekForm.get('commService').value
+        let commService = this.parseHours(commServiceString)
+        let workshopsString = this.hoursPerWeekForm.get('workshops').value
+        let workshops = this.parseHours(workshopsString)
+        let total = classTime.add(supervisedStudy).add(unsupervisedStudy).add(workshops).add(workstudy).add(commService)
+        console.log(total)
+        let hours = total.hours()
+        let minutes = total.minutes() >= 10 ? total.minutes() : "0" + total.minutes()
+        this.totalHours = hours + ":" + minutes
+    }
+
+    parseHours(hourString: string): any {
+        let hours
+        let minutes
+        if(hourString.length == 1) {
+            return moment.duration({ hours: parseInt(hourString) })
+        } else if(hourString.length == 5) {
+            hours = hourString.substring(0, 2)
+            minutes = hourString.substring(3);
+        } else {
+            hours = hourString.substring(0,1)
+            minutes = hourString.substring(2)
+        }
+        return moment.duration({
+            minutes: parseInt(minutes),
+            hours: parseInt(hours)
+        })
     }
 }
