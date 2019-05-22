@@ -6,67 +6,51 @@
     </div>
     <div id="content">
         <mat-card>
-            <div class="hour-per-week">
-                <div class="label">Class Time</div>
-                <div class="hours">
+            <form [formGroup]="hoursPerWeekForm">
+                <div class="hours-per-week">
+                    <div>Class Time</div>
                     <mat-form-field>
-                        <input matInput maxlength="10" placeholder="hrs/wk">
+                        <input matInput placeholder="hrs/wk" formControlName="classTime">
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="hour-per-week">
-                <div class="label">Supervised Study Time</div>
-                <div class="hours">
+                <div class="hours-per-week">
+                    <div>Supervised Study Time</div>
                     <mat-form-field>
-                        <input matInput maxlength="10" placeholder="hrs/wk">
+                        <input matInput placeholder="hrs/wk" formControlName="supervisedStudy">
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="hour-per-week">
-                <div class="label">Unsupervised Study Time</div>
-                <div class="hours">
+                <div class="hours-per-week">
+                    <div>Unsupervised Time</div>
                     <mat-form-field>
-                        <input matInput maxlength="10" placeholder="hrs/wk">
+                        <input matInput placeholder="hrs/wk" formControlName="unsupervisedStudy">
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="hour-per-week">
-                <div class="label">Workstudy</div>
-                <div class="hours">
+                <div class="hours-per-week">
+                    <div>Workstudy Time</div>
                     <mat-form-field>
-                        <input matInput maxlength="10" placeholder="hrs/wk">
+                        <input matInput placeholder="hrs/wk" formControlName="workstudy">
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="hour-per-week">
-                <div class="label">Comm. Services</div>
-                <div class="hours">
+                <div class="hours-per-week">
+                    <div>Comm. Services Time</div>
                     <mat-form-field>
-                        <input matInput maxlength="10" placeholder="hrs/wk">
+                        <input matInput placeholder="hrs/wk" formControlName="commService">
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="hour-per-week">
-                <div class="label">Worshop(s)</div>
-                <div class="hours">
+                <div class="hours-per-week">
+                    <div>Workshop Time</div>
                     <mat-form-field>
-                        <input matInput maxlength="10" placeholder="hrs/wk">
+                        <input matInput placeholder="hrs/wk" formControlName="workshops">
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="hour-per-week">
-                <div class="label">TOTAL HOURS/WEEK</div>
-                <div class="hours">
-                    <mat-form-field>
-                        <input matInput maxlength="10" placeholder="hrs/wk">
-                    </mat-form-field>
-                </div>
-            </div>
+                <button (click)="test()">Test</button>
+            </form>
         </mat-card>
     </div>
     <div>
         <supervised-study></supervised-study>
     </div>
+    <online-class></online-class>
     <div>
         <class-schedule></class-schedule>
     </div>
