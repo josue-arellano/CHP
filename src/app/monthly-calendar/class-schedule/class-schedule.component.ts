@@ -137,10 +137,12 @@ export class ClassScheduleComponent {
                             newCourseInfo.courseName, 
                             newCourseInfo.courseDesc, 
                             newCourseInfo.courseNum, 
-                            false, 
+                            false,
                             newCourseInfo.daysOfWeek,
                             newCourseInfo.meetingDates,
-                            newCourseInfo.meetingTime
+                            newCourseInfo.meetingTime,
+                            false,
+                            false
                         )
                         this.classSchedule = this.classSchedule.concat(newCourse)
                         this.courseEvent.emit(this.classSchedule)

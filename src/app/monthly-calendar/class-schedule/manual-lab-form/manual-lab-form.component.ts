@@ -83,6 +83,8 @@ export class ManualLabFormComponent {
             this.getDaysOfWeek(),
             this.getMeetingDates(),
             '',
+            true,
+            false,
             this.getDailyTimes()
         )
         this.dialogRef.close(course)

@@ -219,6 +219,8 @@ export class ManualCourseComponent {
                 daysOfWeek,
                 meetingDates,
                 meetingTime,
+                false,
+                true,
                 this.getDailyTimes()
             ) 
         } else {
@@ -230,7 +232,9 @@ export class ManualCourseComponent {
                 this.courseForm.get('onlineCourse').value,
                 daysOfWeek,
                 meetingDates,
-                meetingTime
+                meetingTime,
+                false,
+                false
             )
         }
         this.dialogRef.close(course)

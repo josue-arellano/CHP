@@ -19,9 +19,40 @@ export class VSAComponent{
         workshops: new FormControl('')
     })
     totalHours: String
+    classSchedule: Course[] = []
 
-    testForm = new FormControl('')
     constructor() {}
+
+    updateClassSchedule($event) {
+        this.classSchedule = $event
+        console.log("in updateClassSchedule()")
+        this.calculateClassTime()
+        this.calculateSupervisedStudyTime()
+        this.calculateTotal()
+    }
+
+    calculateSupervisedStudyTime() {
+        let supervisedTime = moment.duration({
+            minutes: 0
+        })
+        for(var i = 0; i < this.classSchedule.length; i++) {
+            if(this.classSchedule[i].lab) supervisedTime.add(this.classSchedule[i].totalWeeklyHours)
+        }
+        let timeString = Math.floor(supervisedTime.asHours()) + ":" + supervisedTime.minutes()
+        this.hoursPerWeekForm.get("supervisedStudy").setValue(timeString)
+    }
+
+    calculateClassTime() {
+        let classTime = moment.duration({
+            minutes: 0
+        })
+        for(var i = 0; i < this.classSchedule.length; i++) {
+            if(!this.classSchedule[i].lab)
+                classTime.add(this.classSchedule[i].totalWeeklyHours)
+        }
+        let timeString = Math.floor(classTime.asHours()) + ":" + classTime.minutes()
+        this.hoursPerWeekForm.get("classTime").setValue(timeString)
+    }
 
     calculateTotal():void {
         let classTimeString = this.hoursPerWeekForm.get('classTime').value
@@ -43,6 +74,7 @@ export class VSAComponent{
         this.totalHours = hours + ":" + minutes
     }
 
+    // used to convert the input string into a moment
     parseHours(hourString: string): any {
         let hours
         let minutes

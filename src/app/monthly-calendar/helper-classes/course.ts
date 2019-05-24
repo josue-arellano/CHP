@@ -12,6 +12,8 @@ export class Course {
     startDate: Moment
     endDate: Moment
     variableSchedule: boolean
+    onlineClass: boolean
+    lab: boolean
     totalWeeklyHours = moment.duration()
     totalWeeklyHrsString:string
     dailyTime = moment.duration()
@@ -25,6 +27,8 @@ export class Course {
         daysOfWeek,
         meetingDates,
         meetingTimes,
+        lab,
+        onlineClass,
         hoursPerDayOfWeek?
     ){
         this.courseName = courseName
@@ -32,6 +36,8 @@ export class Course {
         this.courseNum = courseNum
         this.variableSchedule = variableSchedule
         this.daysString = daysOfWeek
+        this.lab = lab
+        this.onlineClass = onlineClass
         this.setMeetingDates(meetingDates)
         if(meetingTimes.length >= 0) {
             if(meetingTimes.includes("Hr")) {
