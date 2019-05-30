@@ -1,98 +1,81 @@
 <mat-card>
     <div>
-        <table>
-            <tr>
-                <th colspan="2" class="head">Supervised Study Time</th>
-            </tr>
-            <tr>
-                <th class="head">Day</th>
-                <th class="head">Start</th>
-                <th class="head">End</th>
-            </tr>
-            <tr>
-                <th class="head">Monday</th>
-                <td class="head">
-                    <tr></tr>
-                    <tr></tr>
-                </td>
-                <td class="head">
-
-                        <tr></tr>
-                        <tr></tr>
-                </td>
-            </tr>
-            <tr>
-                <th class="head">Tuesday</th>
-                <td class="head">
-                    <tr></tr>
-                    <tr></tr>
-                </td>
-                <td class="head">
-
-                        <tr></tr>
-                        <tr></tr>
-                </td>
-            </tr>
-            <tr>
-                <th class="head">Wednesday</th>
-                <td class="head">
-                    <tr></tr>
-                    <tr></tr>
-                </td>
-                <td class="head">
-
-                        <tr></tr>
-                        <tr></tr>
-                </td>
-            </tr>
-            <tr>
-                <th class="head">Thursday</th>
-                <td class="head">
-                    <tr></tr>
-                    <tr></tr>
-                </td>
-                <td class="head">
-
-                        <tr></tr>
-                        <tr></tr>
-                </td>
-            </tr>
-            <tr>
-                <th class="head">Friday</th>
-                <td class="head">
-                    <tr></tr>
-                    <tr></tr>
-                </td>
-                <td class="head">
-
-                        <tr></tr>
-                        <tr></tr>
-                </td>
-            </tr>
-            <tr>
-                <th class="head">Saturday</th>
-                <td class="head">
-                    <tr></tr>
-                    <tr></tr>
-                </td>
-                <td class="head">
-
-                        <tr></tr>
-                        <tr></tr>
-                </td>
-            </tr>
-            <tr>
-                <th class="head">Sunday</th>
-                <td class="head">
-                    <tr></tr>
-                    <tr></tr>
-                </td>
-                <td class="head">
-
-                        <tr></tr>
-                        <tr></tr>
-                </td>
-            </tr>
-        </table>
+        <form [formGroup]="studyTimeHoursForm">
+            <table>
+                <tr>
+                    <th colspan="3" class="head">Supervised Study Time</th>
+                </tr>
+                <tr>
+                    <th class="head">Day</th>
+                    <th class="head">Start</th>
+                    <th class="head">End</th>
+                </tr>
+                <tr *ngFor="let day of days">
+                    <th class="head">{{day}}</th>
+                    <td>
+                        <mat-form-field class="time-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let time of times" [value]="time">
+                                    {{time}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="period-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let period of periods" [value]="period">
+                                    {{period}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="time-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let time of times" [value]="time">
+                                    {{time}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="period-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let period of periods" [value]="period">
+                                    {{period}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="time-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let time of times" [value]="time">
+                                    {{time}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="period-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let period of periods" [value]="period">
+                                    {{period}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="time-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let time of times" [value]="time-selector">
+                                    {{time}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="period-selector">
+                            <mat-select>
+                                <mat-option *ngFor="let period of periods" [value]="period">
+                                    {{period}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 </mat-card>

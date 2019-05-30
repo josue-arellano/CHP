@@ -22,3 +22,8 @@
     font-size: 16px;
     margin: 8px;
 }
+
+.time {
+    max-width: 60px;
+    display: inline-block;
+}

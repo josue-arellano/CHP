@@ -4,6 +4,9 @@ import { FormGroup, FormControl } from '@angular/forms'
 import * as _moment from 'moment'
 
 const moment = _moment
+const zero = moment.duration({
+    minutes: 0
+})
 
 @Component({
     selector: 'vsa',
@@ -40,6 +43,7 @@ export class VSAComponent{
         }
         let timeString = Math.floor(supervisedTime.asHours()) + ":" + supervisedTime.minutes()
         this.hoursPerWeekForm.get("supervisedStudy").setValue(timeString)
+        if(supervisedTime.asMinutes() === 0) this.hoursPerWeekForm.get("supervisedStudy").setValue("")
     }
 
     calculateClassTime() {
@@ -52,6 +56,7 @@ export class VSAComponent{
         }
         let timeString = Math.floor(classTime.asHours()) + ":" + classTime.minutes()
         this.hoursPerWeekForm.get("classTime").setValue(timeString)
+        if(classTime.asMinutes() === 0) this.hoursPerWeekForm.get("classTime").setValue("")
     }
 
     calculateTotal():void {
@@ -68,8 +73,7 @@ export class VSAComponent{
         let workshopsString = this.hoursPerWeekForm.get('workshops').value
         let workshops = this.parseHours(workshopsString)
         let total = classTime.add(supervisedStudy).add(unsupervisedStudy).add(workshops).add(workstudy).add(commService)
-        console.log(total)
-        let hours = total.hours()
+        let hours = Math.floor(total.asHours())
         let minutes = total.minutes() >= 10 ? total.minutes() : "0" + total.minutes()
         this.totalHours = hours + ":" + minutes
     }
@@ -78,7 +82,9 @@ export class VSAComponent{
     parseHours(hourString: string): any {
         let hours
         let minutes
-        if(hourString.length == 1) {
+        if(hourString.length == 0) {
+            return zero
+        } else if(hourString.length == 1) {
             return moment.duration({ hours: parseInt(hourString) })
         } else if(hourString.length == 5) {
             hours = hourString.substring(0, 2)

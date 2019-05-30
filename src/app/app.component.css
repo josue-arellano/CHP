@@ -1,0 +1,10 @@
+.time-selector {
+    max-width: 80px;
+    display: inline-block;
+}
+
+.period-selector {
+    max-width: 60px;
+    display: inline-block;
+}
+
