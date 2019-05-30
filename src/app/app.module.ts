@@ -39,7 +39,6 @@ import { CourseRemovalConfirmationComponent } from './monthly-calendar/day-pop-u
 import { CourseClearConfirmationComponent } from './monthly-calendar/day-pop-up/course-clear-confirmation/course-clear-confirmation.component'
 import { VSAComponent } from './vsa/vsa.component'
 import { SupervisedStudyComponent } from './vsa/supervised-study/supervised-study.component'
-import { OnlineClassComponent } from './vsa/online-class-schedule/online-class-schedule.component'
 
 var routes = [{
   path: '',
@@ -63,8 +62,7 @@ var routes = [{
     CourseClearConfirmationComponent,
     SearchingComponent,
     VSAComponent,
-    SupervisedStudyComponent,
-    OnlineClassComponent
+    SupervisedStudyComponent
   ],
   imports: [
     BrowserModule,

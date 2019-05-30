@@ -8,37 +8,37 @@
         <mat-card>
             <form [formGroup]="hoursPerWeekForm">
                 <div class="hours-per-week">
-                    <div>Class Time</div>
+                    <mat-label>Class Time:  </mat-label>
                     <mat-form-field>
                         <input matInput placeholder="hrs/wk" formControlName="classTime">
                     </mat-form-field>
                 </div>
                 <div class="hours-per-week">
-                    <div>Supervised Study Time</div>
+                    <mat-label>Supervised Study Time:  </mat-label>
                     <mat-form-field>
                         <input matInput placeholder="hrs/wk" formControlName="supervisedStudy">
                     </mat-form-field>
                 </div>
                 <div class="hours-per-week">
-                    <div>Unsupervised Time</div>
+                    <mat-label>Unsupervised Study:  </mat-label>
                     <mat-form-field>
                         <input matInput placeholder="hrs/wk" formControlName="unsupervisedStudy">
                     </mat-form-field>
                 </div>
                 <div class="hours-per-week">
-                    <div>Workstudy Time</div>
+                    <mat-label>Workstudy:  </mat-label>
                     <mat-form-field>
                         <input matInput placeholder="hrs/wk" formControlName="workstudy">
                     </mat-form-field>
                 </div>
                 <div class="hours-per-week">
-                    <div>Comm. Services Time</div>
+                    <mat-label>Comm. Services:  </mat-label>
                     <mat-form-field>
                         <input matInput placeholder="hrs/wk" formControlName="commService">
                     </mat-form-field>
                 </div>
                 <div class="hours-per-week">
-                    <div>Workshop Time</div>
+                    <mat-label>Workshop(s):  </mat-label>
                     <mat-form-field>
                         <input matInput placeholder="hrs/wk" formControlName="workshops">
                     </mat-form-field>
@@ -49,9 +49,8 @@
         </mat-card>
     </div>
     <div>
-        <supervised-study></supervised-study>
+        <supervised-study (totalHourEmit)="supervisedStudyEvent($event)"></supervised-study>
     </div>
-    <online-class></online-class>
     <div>
         <class-schedule (courseEvent)="updateClassSchedule($event)"></class-schedule>
     </div>

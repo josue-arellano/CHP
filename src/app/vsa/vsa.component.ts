@@ -30,20 +30,7 @@ export class VSAComponent{
         this.classSchedule = $event
         console.log("in updateClassSchedule()")
         this.calculateClassTime()
-        this.calculateSupervisedStudyTime()
         this.calculateTotal()
-    }
-
-    calculateSupervisedStudyTime() {
-        let supervisedTime = moment.duration({
-            minutes: 0
-        })
-        for(var i = 0; i < this.classSchedule.length; i++) {
-            if(this.classSchedule[i].lab) supervisedTime.add(this.classSchedule[i].totalWeeklyHours)
-        }
-        let timeString = Math.floor(supervisedTime.asHours()) + ":" + supervisedTime.minutes()
-        this.hoursPerWeekForm.get("supervisedStudy").setValue(timeString)
-        if(supervisedTime.asMinutes() === 0) this.hoursPerWeekForm.get("supervisedStudy").setValue("")
     }
 
     calculateClassTime() {
@@ -54,25 +41,37 @@ export class VSAComponent{
             if(!this.classSchedule[i].lab)
                 classTime.add(this.classSchedule[i].totalWeeklyHours)
         }
+        let hours = Math.floor(classTime.asHours())
+        let minutes = classTime.minutes() < 10 ? "0" + classTime.minutes() : classTime.minutes()
         let timeString = Math.floor(classTime.asHours()) + ":" + classTime.minutes()
         this.hoursPerWeekForm.get("classTime").setValue(timeString)
         if(classTime.asMinutes() === 0) this.hoursPerWeekForm.get("classTime").setValue("")
     }
 
+    supervisedStudyEvent($event) {
+        this.hoursPerWeekForm.get('supervisedStudy').setValue($event)
+        this.calculateTotal()
+    }
+
     calculateTotal():void {
         let classTimeString = this.hoursPerWeekForm.get('classTime').value
-        let classTime = this.parseHours(classTimeString)
+        let total = this.parseHours(classTimeString)
+
         let supervisedStudyString = this.hoursPerWeekForm.get('supervisedStudy').value
-        let supervisedStudy = this.parseHours(supervisedStudyString)
+        total.add(this.parseHours(supervisedStudyString))
+
         let unsupervisedStudyString = this.hoursPerWeekForm.get('unsupervisedStudy').value
-        let unsupervisedStudy = this.parseHours(unsupervisedStudyString)
+        total.add(this.parseHours(unsupervisedStudyString))
+
         let workstudyString = this.hoursPerWeekForm.get('workstudy').value
-        let workstudy = this.parseHours(workstudyString)
+        total.add(this.parseHours(workstudyString))
+
         let commServiceString = this.hoursPerWeekForm.get('commService').value
-        let commService = this.parseHours(commServiceString)
+        total.add(this.parseHours(commServiceString))
+
         let workshopsString = this.hoursPerWeekForm.get('workshops').value
-        let workshops = this.parseHours(workshopsString)
-        let total = classTime.add(supervisedStudy).add(unsupervisedStudy).add(workshops).add(workstudy).add(commService)
+        total.add(this.parseHours(workshopsString))
+
         let hours = Math.floor(total.asHours())
         let minutes = total.minutes() >= 10 ? total.minutes() : "0" + total.minutes()
         this.totalHours = hours + ":" + minutes
@@ -83,7 +82,9 @@ export class VSAComponent{
         let hours
         let minutes
         if(hourString.length == 0) {
-            return zero
+            return moment.duration({
+                minutes: 0
+            })
         } else if(hourString.length == 1) {
             return moment.duration({ hours: parseInt(hourString) })
         } else if(hourString.length == 5) {
@@ -93,6 +94,7 @@ export class VSAComponent{
             hours = hourString.substring(0,1)
             minutes = hourString.substring(2)
         }
+        console.log("hours: " + hours + ", minutes: " + minutes)
         return moment.duration({
             minutes: parseInt(minutes),
             hours: parseInt(hours)

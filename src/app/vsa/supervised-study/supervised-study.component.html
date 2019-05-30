@@ -13,69 +13,85 @@
                 <tr *ngFor="let day of days">
                     <th class="head">{{day}}</th>
                     <td>
-                        <mat-form-field class="time-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let time of times" [value]="time">
-                                    {{time}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field class="period-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let period of periods" [value]="period">
-                                    {{period}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field class="time-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let time of times" [value]="time">
-                                    {{time}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field class="period-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let period of periods" [value]="period">
-                                    {{period}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <div formGroupName="{{day}}">
+                            <div formGroupName="start1">
+                                <mat-form-field class="time-selector">
+                                    <mat-select formControlName="time">
+                                        <mat-option *ngFor="let time of times" [value]="time">
+                                            {{time}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="period-selector">
+                                    <mat-select formControlName="period">
+                                        <mat-option *ngFor="let period of periods" [value]="period">
+                                            {{period}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <br>
+                            <div formGroupName="start2">
+                                <mat-form-field class="time-selector">
+                                    <mat-select formControlName="time">
+                                        <mat-option *ngFor="let time of times" [value]="time">
+                                            {{time}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="period-selector">
+                                    <mat-select formControlName="period">
+                                        <mat-option *ngFor="let period of periods" [value]="period">
+                                            {{period}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
                     </td>
                     <td>
-                        <mat-form-field class="time-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let time of times" [value]="time">
-                                    {{time}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field class="period-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let period of periods" [value]="period">
-                                    {{period}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <br>
-                        <mat-form-field class="time-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let time of times" [value]="time-selector">
-                                    {{time}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field class="period-selector">
-                            <mat-select>
-                                <mat-option *ngFor="let period of periods" [value]="period">
-                                    {{period}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <div formGroupName="{{day}}">
+                            <div formGroupName="end1">
+                                <mat-form-field class="time-selector">
+                                    <mat-select formControlName="time">
+                                        <mat-option *ngFor="let time of times" [value]="time">
+                                            {{time}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="period-selector">
+                                    <mat-select formControlName="period">
+                                        <mat-option *ngFor="let period of periods" [value]="period">
+                                            {{period}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <br>
+                            <div formGroupName="end2">
+                                <mat-form-field class="time-selector">
+                                    <mat-select formControlName="time">
+                                        <mat-option *ngFor="let time of times" [value]="time">
+                                            {{time}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="period-selector">
+                                    <mat-select formControlName="period">
+                                        <mat-option *ngFor="let period of periods" [value]="period">
+                                            {{period}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </table>
+            <div style="display: flex;">
+                <div style="flex: 1 1 auto;"></div>
+                <button mat-raised-button color="primary" (click)="calculateTotalStudy()">Add</button>
+            </div>
         </form>
     </div>
 </mat-card>

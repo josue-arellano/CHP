@@ -1,6 +1,8 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
-import { Course } from '../../monthly-calendar/helper-classes/course'
+import * as _moment from 'moment'
+
+const moment = _moment
 
 @Component({
     selector: 'supervised-study',
@@ -23,143 +25,131 @@ export class SupervisedStudyComponent {
         this.fillTimes()
     }
 
+    @Output() totalHourEmit: EventEmitter<string> = new EventEmitter()
+
     studyTimeHoursForm = new FormGroup({
-        Monday1: new FormGroup({
-            start: new FormGroup({
+        Monday: new FormGroup({
+            start1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
+            end1: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            start2: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            end2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             })
         }),
-        Monday2: new FormGroup({
-            start: new FormGroup({
+        Tuesday: new FormGroup({
+            start1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
+            end1: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            start2: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            end2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             })
         }),
-        Tuesday1: new FormGroup({
-            start: new FormGroup({
+        Wednesday: new FormGroup({
+            start1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
+            end1: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            start2: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            end2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             })
         }),
-        Tuesday2: new FormGroup({
-            start: new FormGroup({
+        Thursday: new FormGroup({
+            start1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
+            end1: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            start2: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            end2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             })
         }),
-        Wednesday1: new FormGroup({
-            start: new FormGroup({
+        Friday: new FormGroup({
+            start1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
+            end1: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            start2: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            end2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             })
         }),
-        Wednesday2: new FormGroup({
-            start: new FormGroup({
+        Saturday: new FormGroup({
+            start1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
+            end1: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            start2: new FormGroup({
+                time: new FormControl(''),
+                period: new FormControl('')
+            }),
+            end2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             })
         }),
-        Thursday1: new FormGroup({
-            start: new FormGroup({
+        Sunday: new FormGroup({
+            start1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            })
-        }),
-        Thursday2: new FormGroup({
-            start: new FormGroup({
+            end1: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            })
-        }),
-        Friday1: new FormGroup({
-            start: new FormGroup({
+            start2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             }),
-            end: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            })
-        }),
-        Friday2: new FormGroup({
-            start: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            }),
-            end: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            })
-        }),
-        Saturday1: new FormGroup({
-            start: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            }),
-            end: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            })
-        }),
-        Saturday2: new FormGroup({
-            start: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            }),
-            end: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            })
-        }),
-        Sunday1: new FormGroup({
-            start: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            }),
-            end: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            })
-        }),
-        Sunday2: new FormGroup({
-            start: new FormGroup({
-                time: new FormControl(''),
-                period: new FormControl('')
-            }),
-            end: new FormGroup({
+            end2: new FormGroup({
                 time: new FormControl(''),
                 period: new FormControl('')
             })
@@ -174,5 +164,34 @@ export class SupervisedStudyComponent {
                 this.times.push(time)
             }
         }
+    }
+
+    calculateDay(day: string): any {
+        let formatString = "h:mm A"
+        let empty = "0:00 AM"
+        let todayGroup = this.studyTimeHoursForm.get(day)
+
+        let start1Time = todayGroup.get("start1").get("time").value ? todayGroup.get("start1").get("time").value + " " + todayGroup.get("start1").get("period").value : empty
+        let end1Time = todayGroup.get("end1").get("time").value ? todayGroup.get("end1").get("time").value + " " + todayGroup.get("end1").get("period").value : empty
+        let day1 = moment.duration(moment(end1Time, formatString).diff(moment(start1Time, formatString)))
+
+        let start2Time = todayGroup.get("start2").get("time").value ? todayGroup.get("start2").get("time").value + " " + todayGroup.get("start2").get("period").value : empty
+        let end2Time = todayGroup.get("end2").get("time").value ? todayGroup.get("end2").get("time").value + " " + todayGroup.get("end2").get("period").value : empty
+        let day2 = moment.duration(moment(end2Time, formatString).diff(moment(start2Time, formatString)))
+
+        let total = day1.add(day2)
+        return total
+    }
+
+    calculateTotalStudy() {
+        let total = moment.duration({
+            minutes: 0
+        })
+        for(var i = 0; i < this.days.length; i++) {
+            total.add(this.calculateDay(this.days[i]))
+        }
+        let hours = Math.floor(total.asHours())
+        let minutes = total.minutes() < 10 ? "0" + total.minutes() : total.minutes()
+        this.totalHourEmit.emit(hours + ":" + minutes)
     }
 }
