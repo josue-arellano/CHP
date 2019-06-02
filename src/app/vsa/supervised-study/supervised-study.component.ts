@@ -7,7 +7,7 @@ const moment = _moment
 @Component({
     selector: 'supervised-study',
     templateUrl: './supervised-study.component.html',
-    styleUrls: ['../../app.component.css']
+    styleUrls: ['../../app.component.css', './supervised-study.component.css']
 })
 export class SupervisedStudyComponent {
     days: string[] = [

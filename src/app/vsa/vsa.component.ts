@@ -11,6 +11,7 @@ const zero = moment.duration({
 @Component({
     selector: 'vsa',
     templateUrl: './vsa.component.html',
+    styleUrls: ['../app.component.css', './vsa.component.css']
 })
 export class VSAComponent{
     hoursPerWeekForm = new FormGroup({

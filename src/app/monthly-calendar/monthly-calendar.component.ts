@@ -24,7 +24,7 @@ export const MY_FORMATS = {
 @Component({
     selector: 'monthly-calendar',
     templateUrl: './monthly-calendar.component.html',
-    styleUrls: ['./monthly-calendar.component.css', './../component-styles.css'],
+    styleUrls: ['./monthly-calendar.component.css', './../component-styles.css', './../app.component.css'],
     providers: [
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
         {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}

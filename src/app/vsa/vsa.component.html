@@ -4,7 +4,7 @@
             <h1 id="mat-h1">Verification of Student Activity</h1>
         </mat-toolbar>
     </div>
-    <div id="content">
+    <div id="content" class="together">
         <mat-card>
             <form [formGroup]="hoursPerWeekForm">
                 <div class="hours-per-week">
@@ -43,15 +43,20 @@
                         <input matInput placeholder="hrs/wk" formControlName="workshops">
                     </mat-form-field>
                 </div>
-                <button (click)="calculateTotal()">Test</button>
+                <div style="display: flex;">
+                    <div style="flex: 1 1 auto;"></div>
+                    <button mat-raised-button color="primary" (click)="calculateTotal()">Add</button>
+                </div>
             </form>
             <div>{{ totalHours }}</div>
         </mat-card>
     </div>
-    <div>
+    <div class="together">
         <supervised-study (totalHourEmit)="supervisedStudyEvent($event)"></supervised-study>
     </div>
     <div>
-        <class-schedule (courseEvent)="updateClassSchedule($event)"></class-schedule>
+        <mat-card>
+            <class-schedule (courseEvent)="updateClassSchedule($event)"></class-schedule>
+        </mat-card>
     </div>
 </div>

@@ -14,7 +14,7 @@ const onlineWarningError = "You are trying to add an online course! Please add t
 @Component({
     selector: 'class-schedule',
     templateUrl: './class-schedule.component.html',
-    styleUrls: ['./class-schedule.component.css']
+    styleUrls: ['./class-schedule.component.css', './../../app.component.css']
 })
 export class ClassScheduleComponent {
     columnsToDisplay = ['courseNum', 'courseName', 'daysOfWeek', 'startTime', 'endTime', 'weeklyHrs', 'remove']
