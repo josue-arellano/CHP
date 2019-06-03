@@ -86,7 +86,8 @@ export class VSAComponent{
             return moment.duration({
                 minutes: 0
             })
-        } else if(hourString.length == 1) {
+        } else if(hourString.length <= 2) {
+            console.log(hourString)
             return moment.duration({ hours: parseInt(hourString) })
         } else if(hourString.length == 5) {
             hours = hourString.substring(0, 2)
