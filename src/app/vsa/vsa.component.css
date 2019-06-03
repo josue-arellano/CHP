@@ -1,7 +1,24 @@
 .together {
-    display: inline;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .mat-form-field-underline {
     margin-bottom: 0px;
 }
+
+.hours-per-week {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-label {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.total-toolbar {
+    border-radius: 4px;
+}
+

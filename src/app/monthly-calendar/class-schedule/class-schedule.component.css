@@ -20,6 +20,10 @@ table {
     margin: 0px 8px;
 }
 
+.super-div {
+    text-align: left !important;
+}
+
 .course-selector {
     max-width: 100px;
 }

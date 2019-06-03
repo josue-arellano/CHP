@@ -32,14 +32,14 @@
                             </div>
                             <br>
                             <div formGroupName="start2">
-                                <mat-form-field class="time-selector">
+                                <mat-form-field class="time-selector bottom">
                                     <mat-select formControlName="time">
                                         <mat-option *ngFor="let time of times" [value]="time">
                                             {{time}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                                <mat-form-field class="period-selector">
+                                <mat-form-field class="period-selector bottom">
                                     <mat-select formControlName="period">
                                         <mat-option *ngFor="let period of periods" [value]="period">
                                             {{period}}
@@ -69,14 +69,14 @@
                             </div>
                             <br>
                             <div formGroupName="end2">
-                                <mat-form-field class="time-selector">
+                                <mat-form-field class="time-selector bottom">
                                     <mat-select formControlName="time">
                                         <mat-option *ngFor="let time of times" [value]="time">
                                             {{time}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                                <mat-form-field class="period-selector">
+                                <mat-form-field class="period-selector bottom">
                                     <mat-select formControlName="period">
                                         <mat-option *ngFor="let period of periods" [value]="period">
                                             {{period}}

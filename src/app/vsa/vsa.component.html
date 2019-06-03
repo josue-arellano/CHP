@@ -1,15 +1,15 @@
-<div id="super-div">
+<div class="super-div">
     <div>
         <mat-toolbar color="primary">
-            <h1 id="mat-h1">Verification of Student Activity</h1>
+            <h1 class="mat-h1">Verification of Student Activity</h1>
         </mat-toolbar>
     </div>
-    <div id="content" class="together">
+    <div class="content" class="together">
         <mat-card>
             <form [formGroup]="hoursPerWeekForm">
                 <div class="hours-per-week">
                     <mat-label>Class Time:  </mat-label>
-                    <mat-form-field>
+                    <mat-form-field class="vsa-time">
                         <input matInput placeholder="hrs/wk" formControlName="classTime">
                     </mat-form-field>
                 </div>
@@ -45,10 +45,13 @@
                 </div>
                 <div style="display: flex;">
                     <div style="flex: 1 1 auto;"></div>
-                    <button mat-raised-button color="primary" (click)="calculateTotal()">Add</button>
+                    <button mat-raised-button color="primary" (click)="calculateTotal()">Calculate Total</button>
                 </div>
             </form>
-            <div>{{ totalHours }}</div>
+            <mat-toolbar color="primary" class="hours-per-week total-toolbar">
+                <mat-label class="total-label">Total: </mat-label>
+                <mat-label class="total-label">{{ totalHours }}</mat-label>
+            </mat-toolbar>
         </mat-card>
     </div>
     <div class="together">
