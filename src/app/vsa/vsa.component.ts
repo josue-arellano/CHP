@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { Course } from '../monthly-calendar/helper-classes/course'
-import { FormGroup, FormControl } from '@angular/forms'
+import { Course } from '../helper-classes/course'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import * as _moment from 'moment'
 
 const moment = _moment
@@ -15,12 +15,24 @@ const zero = moment.duration({
 })
 export class VSAComponent{
     hoursPerWeekForm = new FormGroup({
-        classTime: new FormControl(''),
-        supervisedStudy: new FormControl(''),
-        unsupervisedStudy: new FormControl(''),
-        workstudy: new FormControl(''),
-        commService: new FormControl(''),
-        workshops: new FormControl('')
+        classTime: new FormControl('', [
+            Validators.pattern('([1-2]?[0-9]:[0-5][0-9]|[1-2]?[0-9])')
+        ]),
+        supervisedStudy: new FormControl('', [
+            Validators.pattern('([1-2]?[0-9]:[0-5][0-9]|[1-2]?[0-9])')
+        ]),
+        unsupervisedStudy: new FormControl('', [
+            Validators.pattern('([1-2]?[0-9]:[0-5][0-9]|[1-2]?[0-9])')
+        ]),
+        workstudy: new FormControl('', [
+            Validators.pattern('([1-2]?[0-9]:[0-5][0-9]|[1-2]?[0-9])')
+        ]),
+        commService: new FormControl('', [
+            Validators.pattern('([1-2]?[0-9]:[0-5][0-9]|[1-2]?[0-9])')
+        ]),
+        workshops: new FormControl('', [
+            Validators.pattern('([1-2]?[0-9]:[0-5][0-9]|[1-2]?[0-9])')
+        ])
     })
     totalHours: String
     classSchedule: Course[] = []
