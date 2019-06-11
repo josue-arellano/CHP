@@ -56,7 +56,7 @@ export class VSAComponent{
         }
         let hours = Math.floor(classTime.asHours())
         let minutes = classTime.minutes() < 10 ? "0" + classTime.minutes() : classTime.minutes()
-        let timeString = Math.floor(classTime.asHours()) + ":" + classTime.minutes()
+        let timeString = Math.floor(hours) + ":" + minutes
         this.hoursPerWeekForm.get("classTime").setValue(timeString)
         if(classTime.asMinutes() === 0) this.hoursPerWeekForm.get("classTime").setValue("")
     }
