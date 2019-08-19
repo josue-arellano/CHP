@@ -11,6 +11,7 @@ var ObjectID = mongodb.ObjectID
 
 var db
 const PORT = process.env.PORT || 5000
+const URLPrefix = 'http://205.154.255.98/academics/schedules/courselisting/spring2019-courselisting-n.htm'
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test',{ useNewUrlParser: true }, function(err, client) {
     if(err) {
@@ -27,10 +28,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:2701
 })
 
 const semesters = [
-    'Winter',
-    'Spring',
-    'Summer',
-    'Fall'
+    'winter',
+    'spring',
+    'summer',
+    'fall'
 ]
 var semesterIndex = 0
 var year = 2019
@@ -177,7 +178,7 @@ app.get('/api', async (req, res) => {
     const semester = req.query.semester
     const year = req.query.year
     
-    const response = await runMe('http://elac.edu/academics/schedules/courselisting/class_list_'+ semester + '_' + year + '.htm', req.query.course)
+    const response = await runMe('http://205.154.255.98/academics/schedules/courselisting/'+ semester + '_' + year + '.htm', req.query.course)
 
     console.log("done")
     console.log(response)
@@ -204,4 +205,13 @@ app.get('/semester', function(req, res) {
     })
 })
 
+app.get('/test', function(req, res) {
+    let semester = req.query.semester
+    let year = req.query.year
+    collections = (semester, year)
+    res.send({
+        "message": "ok",
+        "collections": collections
+    })
+})
 // Start the app by listening on the default Heroku port
