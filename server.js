@@ -158,10 +158,6 @@ app.get('/api', async (req, res) => {
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/frontend'));
 
-app.get('/', function(req,res) {
-    res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
-});
-
 app.get('/vsa', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
 });
@@ -175,4 +171,8 @@ app.get('/semester', function(req, res) {
         "collections": collections
     })
 })
+
+app.get('/', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
+});
 // Start the app by listening on the default Heroku port
