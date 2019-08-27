@@ -24,8 +24,8 @@ var db
 const PORT = process.env.PORT || 5000
 //The new uri is of the form:
 //http://205.154.255.98/academics/schedules/courselisting/spring2019-courselisting-n.htm
-const URLPrefix = 'http://205.154.255.98/academics/schedules/courselisting/'
-const URLPostfix = '-courselisting-n.htm'
+const URLPrefix = 'http://205.154.255.98/academics/schedules/courselisting/class_list_'
+const URLPostfix = '.htm'
 
 // This connects the app to the database
 mongodb.MongoClient.connect(process.env.MONGODB_URI
@@ -48,7 +48,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI
 // This is used to get a consistent url throughout the program
 function createURL(semester, year) {
     if(semesters.indexOf(semester) >= 0 && year >= firstYear ) {
-        return URLPrefix + semester + year + URLPostfix
+        return URLPrefix + '_' + semester + year + URLPostfix
     } else {
         return null
     }
@@ -145,7 +145,7 @@ app.get('/api', async (req, res) => {
             message: 'course number required'
         })
     }
-    const semester = req.query.semester.toLowerCase();
+    const semester = req.query.semester
     const year = req.query.year
     let url = createURL(semester, year)
     const response = await getCourseListing(url, req.query.course)
