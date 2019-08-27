@@ -4,10 +4,10 @@ const path = require('path');
 const app = express();
 
 const semesters = [
-    'winter',
-    'spring',
-    'summer',
-    'fall'
+    'Winter',
+    'Spring',
+    'Summer',
+    'Fall'
 ]
 var semesterIndex = 0
 var firstYear = 2019
@@ -23,7 +23,7 @@ var db
 
 const PORT = process.env.PORT || 5000
 //The new uri is of the form:
-//http://205.154.255.98/academics/schedules/courselisting/spring2019-courselisting-n.htm
+//http://205.154.255.98/academics/schedules/courselisting/class_list_Summer_2019.htm
 const URLPrefix = 'http://205.154.255.98/academics/schedules/courselisting/class_list_'
 const URLPostfix = '.htm'
 
@@ -47,7 +47,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI
 
 // This is used to get a consistent url throughout the program
 function createURL(semester, year) {
-    if(semesters.indexOf(semester) >= 0 && year >= firstYear ) {
+    if(semesters.indexOf(semester) >= 0) {
         return URLPrefix + semester + '_' +  year + URLPostfix
     } else {
         return null
