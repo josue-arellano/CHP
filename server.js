@@ -145,7 +145,7 @@ app.get('/api', async (req, res) => {
             message: 'course number required'
         })
     }
-    const semester = req.query.semester
+    const semester = req.query.semester.toLowerCase();
     const year = req.query.year
     let url = createURL(semester, year)
     const response = await getCourseListing(url, req.query.course)
