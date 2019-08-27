@@ -48,7 +48,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI
 // This is used to get a consistent url throughout the program
 function createURL(semester, year) {
     if(semesters.indexOf(semester) >= 0 && year >= firstYear ) {
-        return URLPrefix + '_' + semester + year + URLPostfix
+        return URLPrefix + semester + '_' +  year + URLPostfix
     } else {
         return null
     }
