@@ -126,6 +126,8 @@ var getCourseListing = async (url, courseNumber) => {
 }
 
 app.use(bodyParser.json())
+
+// Endpoints for getting course info
 app.get('/api', async (req, res) => {
     if(!req.query.semester) {
         res.status(400).send({
