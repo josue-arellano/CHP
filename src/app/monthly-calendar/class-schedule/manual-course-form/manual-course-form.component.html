@@ -35,45 +35,17 @@
                 <div class="column-content">
                     <h4>Start Time</h4>
                     <mat-form-field class="time-selector">
-                        <mat-select placeholder="Hr" class="time-selector" id="hour-selector" formControlName="startHr">
-                            <mat-option *ngFor="let hour of hours" [value]="hour">
-                                {{ hour }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="time-selector">
-                        <mat-select placeholder="Min" id="minute-selector" formControlName="startMi">
-                            <mat-option *ngFor="let min of minutes" [value]="min">
-                                {{ min }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="time-selector">
-                        <mat-select placeholder="AM/PM" class="time-selector" id="period-selector" formControlName="startPe">
-                            <mat-option *ngFor="let per of period" [value]="per">
-                                {{ per }}
+                        <mat-select placeholder="Start Time" class="time-selector" id="start-selector" formControlName="startTime">
+                            <mat-option *ngFor="let time of times" [value]="time">
+                                {{ time }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <h4>End Time</h4>
                     <mat-form-field class="time-selector">
-                        <mat-select placeholder="Hr" class="time-selector" id="hour-selector" formControlName="endHr">
-                            <mat-option *ngFor="let hour of hours" [value]="hour">
-                                {{ hour }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="time-selector">
-                        <mat-select placeholder="Min" id="minute-selector" formControlName="endMi">
-                            <mat-option *ngFor="let min of minutes" [value]="min">
-                                {{ min }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="time-selector">
-                        <mat-select placeholder="AM/PM" class="time-selector" id="period-selector" formControlName="endPe">
-                            <mat-option *ngFor="let per of period" [value]="per">
-                                {{ per }}
+                        <mat-select placeholder="Start Time" class="time-selector" id="hour-selector" formControlName="endTime">
+                            <mat-option *ngFor="let time of times" [value]="time">
+                                {{ time }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

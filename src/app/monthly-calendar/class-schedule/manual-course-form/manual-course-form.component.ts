@@ -2,6 +2,7 @@ import { Component, Inject, EventEmitter, Output } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { Course } from '../../helper-classes/course'
+import { Times } from '../../../helper-classes/times'
 import * as _moment from 'moment'
 import { Moment } from 'moment'
 
@@ -22,17 +23,12 @@ function checkedBoxValidator(control: FormGroup) {
 function typeOfCourse(control: FormGroup) {
     let isOnline = control.get('onlineCourse').value
     if(!isOnline) {
-        let startHr = control.get('inclassForm').get('startHr').value
-        let startMi = control.get('inclassForm').get('startMi').value
-        let startPe = control.get('inclassForm').get('startPe').value
-        let endHr = control.get('inclassForm').get('endHr').value
-        let endMi = control.get('inclassForm').get('endMi').value
-        let endPe = control.get('inclassForm').get('endPe').value
-        if(startHr && startMi && startPe && endHr && endMi && endPe) {
-            let startTime = startHr + ":" + startMi + startPe
-            let endTime = endHr + ":" + endMi + endPe
+        let startTime = control.get('inclassForm').get('startTime').value
+        let endTime = control.get('inclassForm').get('endTime').value
+        if(startTime && endTime) {
             let start = moment(startTime, "hh:mmA")
             let end = moment(endTime, "hh:mmA")
+            console.log('start: ' + start + ', end: ' + end)
             if(start > end) return {
                 incorrectTimes: {
                     start: start,
@@ -42,12 +38,8 @@ function typeOfCourse(control: FormGroup) {
         } else {
             return {
                 missingHours: {
-                    start1: startHr,
-                    start2: startMi,
-                    start3: startPe,
-                    end1: endHr,
-                    end2: endMi,
-                    end3: endPe
+                    start1: startTime,
+                    end1: endTime,
                 }
             }
         }
@@ -91,41 +83,10 @@ function correctDates(control: FormGroup) {
     styleUrls: ['./manual-course-form.component.css', '../../../component-styles.css']
 })
 export class ManualCourseComponent {
-    hours: string[] = [
-        '01',
-        '02',
-        '03',
-        '04',
-        '05',
-        '06',
-        '07',
-        '08',
-        '09',
-        '10',
-        '11',
-        '12'
-    ]
+    TimeArr: Times = new Times 
 
-    minutes: string[] = [
-        '00',
-        '05',
-        '10',
-        '15',
-        '20',
-        '25',
-        '30',
-        '35',
-        '40',
-        '45',
-        '50',
-        '55'
-    ]
-
-    period: string[] = [
-        'AM',
-        'PM'
-    ]
-
+    times: string[] = this.TimeArr.getTimes()
+    
     disabled = true
 
     @Output() newCourseInput: EventEmitter<Course> = new EventEmitter()
@@ -188,12 +149,8 @@ export class ManualCourseComponent {
             fri: new FormControl(false),
             sat: new FormControl(false),
             sun: new FormControl(false),
-            startHr: new FormControl(),
-            startMi: new FormControl(),
-            startPe: new FormControl(),
-            endHr: new FormControl(),
-            endMi: new FormControl(),
-            endPe: new FormControl()
+            startTime: new FormControl(),
+            endTime: new FormControl(),
         }),
         startDate: new FormControl(),
         endDate: new FormControl()
@@ -257,15 +214,9 @@ export class ManualCourseComponent {
     }
 
     getMeetingTime(): string {
-        var meetingTime = this.courseForm.get('inclassForm').get('startHr').value 
-                + ":" 
-                + this.courseForm.get('inclassForm').get('startMi').value
-                + this.courseForm.get('inclassForm').get('startPe').value
-                + "-"
-                + this.courseForm.get('inclassForm').get('endHr').value 
-                + ":" 
-                + this.courseForm.get('inclassForm').get('endMi').value
-                + this.courseForm.get('inclassForm').get('endPe').value
+        var meetingTime = this.courseForm.get('inclassForm').get('startTime').value
+                            + "-"
+                            + this.courseForm.get('inclassForm').get('endTime').value
         return meetingTime
     }
 
